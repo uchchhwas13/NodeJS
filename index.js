@@ -23,7 +23,8 @@ app.get('/users', (req, res) => {
     return res.send(html);
 });
 
-app.get('/api/users/:id', (req, res) => {
+app.route('/api/users/:id')
+.get( (req, res) => {
     const userId = parseInt(req.params.id);
     const user = users.find(user => user.id === userId);
     if (user) {
@@ -36,8 +37,9 @@ app.get('/api/users/:id', (req, res) => {
     return res.json({status: 'Pending'});
 })
 .delete((req, res) => {
-    res.json({status: 'Pending'})
+    res.json({status: 'Pending'});
 });
+
 
 app.post('/api/users', (req, res) => {
     return res.json({status: 'Pending'});

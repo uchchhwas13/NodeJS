@@ -1,7 +1,11 @@
-const http = require('http');
 const express = require('express');
+const users = require('./MOCK_DATA.json');
 
 const app = express();
+
+app.get('/api/users', (req, res) => {
+    return res.json(users);
+});
 
 app.get('/', (req, res) => {
     return res.send("Hello from Home Page");

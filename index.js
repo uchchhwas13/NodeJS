@@ -31,6 +31,16 @@ app.get('/api/users/:id', (req, res) => {
     } else {
         return res.status(404).send('User not found');
     }
+})
+.patch((req, res) => {
+    return res.json({status: 'Pending'});
+})
+.delete((req, res) => {
+    res.json({status: 'Pending'})
+});
+
+app.post('/api/users', (req, res) => {
+    return res.json({status: 'Pending'});
 });
 
 app.get('/', (req, res) => {

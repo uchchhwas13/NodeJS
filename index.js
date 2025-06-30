@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/users', (req, res) => {
+    //Custom header should start with 'X-'
+    res.setHeader('X-Custom-Header', 'MyCustomHeaderValue');
     return res.json(users);
 });
 

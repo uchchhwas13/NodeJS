@@ -7,6 +7,14 @@ const app = express();
 //Middleware - plugin
 app.use(express.urlencoded({extended: false}));
 
+app.use((req, res, next) => {
+    fs.appendFile('log.txt', `${Date.now()} - ${req.method} - ${req.url}\n`, (err) => {
+        if (err) {
+            console.error('Error writing to log file:', err);
+        }
+    });
+    next();
+});
 
 app.get('/api/users', (req, res) => {
     return res.json(users);

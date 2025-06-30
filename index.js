@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const users = require('./MOCK_DATA.json');
 
 const app = express();
@@ -48,7 +49,22 @@ app.route('/api/users/:id')
 app.post('/api/users', (req, res) => {
     const body = req.body;
     console.log("Body", body);
-    return res.json({status: 'Pending'});
+    users.push({
+        id: users.length + 1,
+        first_name: body.first_name,
+        last_name: body.last_name,
+        email: body.email,
+        gender: body.gender,
+        job_title: body.job_title
+    });
+    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
+        if (err) {
+            console.error('Error writing to file:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        console.log('File written successfully');
+    });
+    return res.json({status: 'success', id:users.length});
 });
 
 app.get('/', (req, res) => {

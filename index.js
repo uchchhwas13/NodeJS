@@ -7,6 +7,21 @@ app.get('/api/users', (req, res) => {
     return res.json(users);
 });
 
+app.get('/users', (req, res) => {
+    const html = `
+        <html>
+            <head>
+                <title>Users</title>
+            </head>
+            <body>
+                <h1>Users List</h1>
+                <ul>
+                    ${users.map(user => `<li>${user.first_name} ${user.last_name}</li>`).join('')}
+                </ul>
+            </body>
+        </html>`;
+    return res.send(html);
+});
 app.get('/', (req, res) => {
     return res.send("Hello from Home Page");
 });

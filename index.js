@@ -22,6 +22,17 @@ app.get('/users', (req, res) => {
         </html>`;
     return res.send(html);
 });
+
+app.get('/api/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const user = users.find(user => user.id === userId);
+    if (user) {
+        return res.json(user);
+    } else {
+        return res.status(404).send('User not found');
+    }
+});
+
 app.get('/', (req, res) => {
     return res.send("Hello from Home Page");
 });

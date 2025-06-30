@@ -2,3 +2,5 @@
 1751285262249 - GET - /api/users
 1751285348868 - GET - /api/users
 1751287244550 - GET - /api/users
+1751288262427 - POST - /api/users
+1751288285321 - POST - /api/users

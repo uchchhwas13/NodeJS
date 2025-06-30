@@ -74,7 +74,7 @@ app.post('/api/users', (req, res) => {
         }
         console.log('File written successfully');
     });
-    return res.json({status: 'success', id:users.length});
+    return res.status(201).json({status: 'success', id:users.length});
 });
 
 app.get('/', (req, res) => {

@@ -3,6 +3,10 @@ const users = require('./MOCK_DATA.json');
 
 const app = express();
 
+//Middleware - plugin
+app.use(express.urlencoded({extended: false}));
+
+
 app.get('/api/users', (req, res) => {
     return res.json(users);
 });
@@ -42,6 +46,8 @@ app.route('/api/users/:id')
 
 
 app.post('/api/users', (req, res) => {
+    const body = req.body;
+    console.log("Body", body);
     return res.json({status: 'Pending'});
 });
 

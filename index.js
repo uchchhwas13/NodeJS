@@ -11,8 +11,4 @@ app.get('/about', (req, res) => {
     return res.send("Hello from About Page");
 });
 
-const myServer = http.createServer(app);
-
-myServer.listen(8000, () => {
-    console.log("Server is running at http://localhost:8000");
-});
+app.listen(3000, () => console.log("Server is running on port 3000"));

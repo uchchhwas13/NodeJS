@@ -46,10 +46,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/api/users', (req, res) => {
+app.get('/api/users', async (req, res) => {
+    const allDbUsers = await User.find();
     //Custom header should start with 'X-'
     res.setHeader('X-Custom-Header', 'MyCustomHeaderValue');
-    return res.json(users);
+    return res.json(allDbUsers);
 });
 
 app.get('/users', async (req, res) => {

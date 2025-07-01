@@ -13,6 +13,12 @@ const router = express.Router();
 router.get('/', handleGetAllUsers)
       .post('/',handleCreateNewUser);
 
+router
+    .route('/:id')
+    .get(handleGetUserById)
+    .patch(handleUpdateUserById)
+    .delete(handleDeleteUserById);
+
 // router.get('/', async (req, res) => {
 //     const allDbUsers = await User.find();
 //     console.log("All Users from DB:", allDbUsers);
@@ -31,14 +37,6 @@ router.get('/', handleGetAllUsers)
 //     return res.send(html);
 // });
 
-router
-.route('/:id')
-.get(handleGetUserById)
-.patch(handleUpdateUserById)
-.delete(handleDeleteUserById);
-
-
-router
 
 // router.get('/', (req, res) => {
 //     return res.send("Hello from Home Page");

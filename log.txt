@@ -10,3 +10,6 @@
 1751346625574 - POST - /api/users
 1751346769771 - POST - /api/users
 1751346874481 - POST - /api/users
+1751347743704 - GET - /
+1751347744539 - GET - /favicon.ico
+1751347750304 - GET - /users

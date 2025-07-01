@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const mongoose = require('mongoose');
-const users = require('./MOCK_DATA.json');
 
 const app = express();
 
@@ -53,7 +52,9 @@ app.get('/api/users', (req, res) => {
     return res.json(users);
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', async (req, res) => {
+    const allDbUsers = await User.find();
+    console.log("All Users from DB:", allDbUsers);
     const html = `
         <html>
             <head>
@@ -62,7 +63,7 @@ app.get('/users', (req, res) => {
             <body>
                 <h1>Users List</h1>
                 <ul>
-                    ${users.map(user => `<li>${user.first_name} ${user.last_name}</li>`).join('')}
+                    ${allDbUsers.map(user => `<li>${user.firstName} ${user.lastName} ${user.email}</li>`).join('')}
                 </ul>
             </body>
         </html>`;

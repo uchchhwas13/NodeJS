@@ -29,8 +29,8 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String
-    }
-});
+    },
+}, {timestamps: true});
 
 //Model
 const User = mongoose.model('User', userSchema);
@@ -87,12 +87,22 @@ app.route('/api/users/:id')
 });
 
 
-app.post('/api/users', (req, res) => {
+app.post('/api/users', async (req, res) => {
     const body = req.body;
     console.log("Body", body);
     if (!body.first_name || !body.email || !body.gender || !body.job_title) {
         return res.status(400).send('All fields are required');
     }
+
+    const result = await User.create({
+        firstName: body.first_name,
+        lastName: body.last_name,
+        email: body.email,
+        job_title: body.job_title,
+        gender: body.gender});
+
+    console.log("User created:", result); 
+    
     users.push({
         id: users.length + 1,
         first_name: body.first_name,
@@ -101,14 +111,14 @@ app.post('/api/users', (req, res) => {
         gender: body.gender,
         job_title: body.job_title
     });
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
-        if (err) {
-            console.error('Error writing to file:', err);
-            return res.status(500).send('Internal Server Error');
-        }
-        console.log('File written successfully');
-    });
-    return res.status(201).json({status: 'success', id:users.length});
+    // fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
+    //     if (err) {
+    //         console.error('Error writing to file:', err);
+    //         return res.status(500).send('Internal Server Error');
+    //     }
+    //     console.log('File written successfully');
+    // });
+    return res.status(201).json({status: 'success', id:result._id});
 });
 
 app.get('/', (req, res) => {

@@ -2,30 +2,30 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 
-// router.get('/api/users', async (req, res) => {
-//     const allDbUsers = await User.find();
-//     //Custom header should start with 'X-'
-//     res.setHeader('X-Custom-Header', 'MyCustomHeaderValue');
-//     return res.json(allDbUsers);
-// });
-
 router.get('/', async (req, res) => {
     const allDbUsers = await User.find();
-    console.log("All Users from DB:", allDbUsers);
-    const html = `
-        <html>
-            <head>
-                <title>Users</title>
-            </head>
-            <body>
-                <h1>Users List</h1>
-                <ul>
-                    ${allDbUsers.map(user => `<li>${user.firstName} ${user.lastName} ${user.email}</li>`).join('')}
-                </ul>
-            </body>
-        </html>`;
-    return res.send(html);
+    //Custom header should start with 'X-'
+    res.setHeader('X-Custom-Header', 'MyCustomHeaderValue');
+    return res.json(allDbUsers);
 });
+
+// router.get('/', async (req, res) => {
+//     const allDbUsers = await User.find();
+//     console.log("All Users from DB:", allDbUsers);
+//     const html = `
+//         <html>
+//             <head>
+//                 <title>Users</title>
+//             </head>
+//             <body>
+//                 <h1>Users List</h1>
+//                 <ul>
+//                     ${allDbUsers.map(user => `<li>${user.firstName} ${user.lastName} ${user.email}</li>`).join('')}
+//                 </ul>
+//             </body>
+//         </html>`;
+//     return res.send(html);
+// });
 
 router.route('/:id')
 .get(async (req, res) => {

@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+const User = mongoose.model('User', userSchema);
 
 //Middleware - plugin
 app.use(express.urlencoded({extended: false}));

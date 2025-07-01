@@ -72,9 +72,8 @@ app.get('/users', async (req, res) => {
 });
 
 app.route('/api/users/:id')
-.get( (req, res) => {
-    const userId = parseInt(req.params.id);
-    const user = users.find(user => user.id === userId);
+.get(async (req, res) => {
+    const user = await User.findById(req.params.id);
     if (user) {
         return res.json(user);
     } else {

@@ -1,13 +1,9 @@
 const express = require('express');
+const {handleGetAllUsers, handleGetUserById} = require('../controllers/user');
 const User = require('../models/user');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const allDbUsers = await User.find();
-    //Custom header should start with 'X-'
-    res.setHeader('X-Custom-Header', 'MyCustomHeaderValue');
-    return res.json(allDbUsers);
-});
+router.get('/', handleGetAllUsers);
 
 // router.get('/', async (req, res) => {
 //     const allDbUsers = await User.find();
@@ -27,15 +23,9 @@ router.get('/', async (req, res) => {
 //     return res.send(html);
 // });
 
-router.route('/:id')
-.get(async (req, res) => {
-    const user = await User.findById(req.params.id);
-    if (user) {
-        return res.json(user);
-    } else {
-        return res.status(404).send('User not found');
-    }
-})
+router
+.route('/:id')
+.get(handleGetUserById)
 .patch(async (req, res) => {
     await User.findByIdAndUpdate(req.params.id, {firstName: req.body.first_name});
     return res.json({status: 201, message: 'User updated successfully'});

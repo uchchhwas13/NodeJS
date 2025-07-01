@@ -10,7 +10,8 @@ const {handleGetAllUsers,
 const User = require('../models/user');
 const router = express.Router();
 
-router.get('/', handleGetAllUsers);
+router.get('/', handleGetAllUsers)
+      .post('/',handleCreateNewUser);
 
 // router.get('/', async (req, res) => {
 //     const allDbUsers = await User.find();
@@ -37,7 +38,7 @@ router
 .delete(handleDeleteUserById);
 
 
-router.post('/',handleCreateNewUser);
+router
 
 // router.get('/', (req, res) => {
 //     return res.send("Hello from Home Page");

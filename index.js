@@ -13,6 +13,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(logRequestResponse('log.txt'));
 
 //Routes
-app.use("/user", userRouter);
+app.use("/api/user", userRouter);
 
 app.listen(3000, () => console.log("Server is running on port 3000"));

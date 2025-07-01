@@ -10,8 +10,9 @@ const {handleGetAllUsers,
 const User = require('../models/user');
 const router = express.Router();
 
-router.get('/', handleGetAllUsers)
-      .post('/',handleCreateNewUser);
+router.route("/")
+      .get(handleGetAllUsers)
+      .post(handleCreateNewUser);
 
 router
     .route('/:id')
@@ -19,6 +20,7 @@ router
     .patch(handleUpdateUserById)
     .delete(handleDeleteUserById);
 
+module.exports = router;
 // router.get('/', async (req, res) => {
 //     const allDbUsers = await User.find();
 //     console.log("All Users from DB:", allDbUsers);
@@ -45,5 +47,3 @@ router
 // router.get('/about', (req, res) => {
 //     return res.send("Hello from About Page");
 // });
-
-module.exports = router;

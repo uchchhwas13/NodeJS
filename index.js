@@ -90,6 +90,9 @@ app.route('/api/users/:id')
 app.post('/api/users', (req, res) => {
     const body = req.body;
     console.log("Body", body);
+    if (!body.first_name || !body.email || !body.gender || !body.job_title) {
+        return res.status(400).send('All fields are required');
+    }
     users.push({
         id: users.length + 1,
         first_name: body.first_name,

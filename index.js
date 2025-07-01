@@ -5,6 +5,11 @@ const users = require('./MOCK_DATA.json');
 
 const app = express();
 
+//Connection
+mongoose.connect('mongodb://127.0.0.1:27017/userdb')
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Error connecting to MongoDB:', err));
+
 // Schema
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -27,6 +32,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+//Model
 const User = mongoose.model('User', userSchema);
 
 //Middleware - plugin

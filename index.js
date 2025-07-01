@@ -5,6 +5,29 @@ const users = require('./MOCK_DATA.json');
 
 const app = express();
 
+// Schema
+const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true  
+    },
+    lastName: {
+        type: String
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    job_title: {
+        type: String
+    },
+    gender: {
+        type: String
+    }
+});
+
+
 //Middleware - plugin
 app.use(express.urlencoded({extended: false}));
 

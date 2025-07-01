@@ -80,8 +80,9 @@ app.route('/api/users/:id')
         return res.status(404).send('User not found');
     }
 })
-.patch((req, res) => {
-    return res.json({status: 'Pending'});
+.patch(async (req, res) => {
+    await User.findByIdAndUpdate(req.params.id, {firstName: req.body.first_name});
+    return res.json({status: 201, message: 'User updated successfully'});
 })
 .delete((req, res) => {
     res.json({status: 'Pending'});
